@@ -1,0 +1,37 @@
+.display{
+ 
+   
+}
+
+
+.displayRes{
+    border: 1px solid white;
+    height: 110px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 2.5rem;
+    text-align: end;
+    margin-bottom: 1rem;
+}
+
+.displayKeys div button{
+    width: 50px;
+    height: 50px;
+ 
+    color: white;
+    background-color: gray;
+    border: none;
+    border-radius: 50%;
+   /* padding: 9px 15px; */
+    margin: 0.7rem;
+    font-size: 2.25rem;
+}
+.displayKeys div button:hover{
+    opacity:0.7
+}
+.displayKeys div{
+    text-align: center;   
+    
+}
+

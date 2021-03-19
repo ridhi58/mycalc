@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Display.css'
 
 export default function Display() {
 
     const [result, setResult] = useState("")
     const [on, setOn] = useState(true)
+    const [limit, setLimit] = useState(false)
+    const ref = useRef();
 
     const handleButton = (e) => {
         setResult(result + e.target.name)
     }
 
     const handleResult = () => {
+
+
         setResult(eval(result))
+
+
+
     }
 
     const handleOnOff = () => {
@@ -34,26 +41,32 @@ export default function Display() {
 
     }
 
+    const handleBack = () => {
+        setResult(result.substr(0, result.length - 1))
+    }
+
     useEffect(() => {
 
         if (result.length == 13) {
-            setResult("limit reached")
+            setLimit(true)
         }
 
+        if (limit)
+            setResult("limit reached")
+    })
 
-
-    }, [result])
     return (
         <div className="display">
             <div className="displayRes" >
                 {
-                    on ? <span>{result}</span> : "off"
+                    on ? <span>{result}</span> : <span style={{ color: "gray" }}>OFF</span>
                 }
             </div>
             <div className="displayKeys">
                 <div>
                     <button style={{ width: "90px" }} onClick={handleOnOff}>AC</button>
-                    <button onClick={() => { setResult("") }}>C</button>
+                    <button onClick={() => { setResult(""); setLimit(false) }}>C</button>
+                    <button onClick={handleBack}><i class="fas fa-arrow-left"></i></button>
                 </div>
                 <div >
                     <button name='7' onClick={handleButton}>7</button>

@@ -28,8 +28,15 @@ export default function Display() {
     }
 
     const handleResult = () => {
-        if (!limit)
-            setResult(eval(result))
+        try {
+            if (!limit)
+                setResult(eval(result))
+        }
+        catch (e) {
+            setResult("invalid")
+            alert("invalid operation")
+            setResult("")
+        }
     }
 
     const handleOnOff = () => {

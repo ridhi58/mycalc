@@ -1,11 +1,7 @@
 .App{
-  height: 500px;
-  border:5px solid gray;
-border-radius: 10px;
-  width: 300px;
-  background-color: black;
- 
-  margin: 2.5rem  auto;
-  padding:1rem;
+   height: 550px;
+  width: 350px;
+  margin: 2rem  auto; 
+
 } 
 

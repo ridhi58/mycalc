@@ -2,12 +2,16 @@
 button{
     background-color: inherit;
     border: none;
+    
 }
 
 .display{
    
     border:5px solid gray;
     border-radius: 10px;
+    height: 550px;
+    width: 350px;
+    margin: 2rem  auto; 
 }
 
 

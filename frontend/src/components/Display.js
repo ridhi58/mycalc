@@ -36,14 +36,6 @@ export default function Display() {
         setResult("")
         setOn(!on)
     }
-    const handleDecimal = (e) => {
-        if (result.indexOf('.') != -1) {
-            setResult(result)
-        }
-        else {
-            setResult(result + e.target.name)
-        }
-    }
 
     const handleZero = (e) => {
 
@@ -118,7 +110,7 @@ export default function Display() {
                     </div>
                     <div>
                         <button name='0' onClick={handleZero}>0</button>
-                        <button name='.' onClick={handleDecimal}>.</button>
+                        <button name='.' onClick={handleButton}>.</button>
                         <button style={{ backgroundColor: "orange" }} name='=' onClick={handleResult}>=</button>
                         <button style={{ backgroundColor: "orange" }} name='+' onClick={handleButton}>+</button>
                     </div>

@@ -1,0 +1,26 @@
+.headerCont{
+    height: 70px;
+    background-color: orange;
+}
+
+
+.header{
+   height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.headerH{
+    margin:0;   
+    color: white;
+    font-size: 35px;
+}
+
+.headerB{
+    position: absolute;
+    right: 55px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}

@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
         const token = await user.generateAuthToken()
         req.session.user = token
         res.cookie("cookie-key", "cookie-value", {
-            maxAge: 10000 * 60
+            maxAge: 100000 * 60
         })
         res.send({ user, token })
     }

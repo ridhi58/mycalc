@@ -37,7 +37,7 @@ export default function Login() {
 
         }).catch((e) => {
             console.log(e)
-            alert("Invalid login")
+            alert("The emailid id not registerd")
         })
 
 

@@ -11,7 +11,7 @@ module.exports = session({
     saveUninitialized: true,
     proxy: true,
     cookie: {
-        maxAge: 10000 * 60,
+        maxAge: 100000 * 60,
         sameSite: 'strict',
         httpOnly: true,
         secure: false

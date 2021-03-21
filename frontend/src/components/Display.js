@@ -11,6 +11,20 @@ export default function Display() {
     const [history, setHistory] = useState(false);
     const [theme, setTheme] = useState("black")
     const [inputColor, setInputC] = useState("black")
+    let Color = ['#000', '#ca3e47', '#ff7844']
+    const [color, setcolor] = useState(Color)
+    const [storeHis, setStore] = useState([])
+
+
+    const setColor = (i) => {
+        Color = color.map((c, j) => {
+            if (j == i)
+                return document.getElementById(`color${i}`).value
+            else
+                return c
+        })
+        setcolor(Color)
+    }
 
 
     const Settings = () => {
@@ -20,6 +34,10 @@ export default function Display() {
                 <p>Theme</p>
                 <input type="radio" checked={theme === "white"} onChange={() => { setTheme("white"); setInputC("gray") }} ></input><span>Light theme</span>
                 <input type="radio" checked={theme === "black"} onChange={() => { setTheme("black"); setInputC("black") }} ></input><span>Dark theme</span>
+                <p>
+                    <p>Change screen color</p>
+                    <input type="color" id={`color${0}`} name="favcolor" value={color[0]} onChange={() => { setColor(0) }} />
+                </p>
             </div>
         )
     }
@@ -29,11 +47,19 @@ export default function Display() {
 
     const handleResult = () => {
         try {
-            if (!limit)
-                setResult(eval(result))
+
+
+            if (!limit && result != "") {
+                if (localStorage.getItem("user") != null) {
+                    storeHis.push(result)
+                }
+                let res = eval(result)
+                setResult(res)
+            }
         }
         catch (e) {
-            setResult("invalid")
+
+
             alert("invalid operation")
             setResult("")
         }
@@ -52,7 +78,12 @@ export default function Display() {
     }
 
     const handleBack = () => {
-        setResult(result.substr(0, result.length - 1))
+        try {
+            setResult(result.substr(0, result.length - 1))
+        }
+        catch (e) {
+            setResult("")
+        }
     }
 
     const handleSettings = () => {
@@ -65,10 +96,11 @@ export default function Display() {
     }
 
 
+
     useEffect(() => {
 
 
-        if (result.length == 13) {
+        if (result != null && result.length == 13) {
             setLimit(true)
         }
 
@@ -79,7 +111,7 @@ export default function Display() {
     return (
         <div style={{ backgroundColor: theme }} className="display" >
 
-            <div className="displayRes" style={{ backgroundColor: inputColor }}>
+            <div className="displayRes" style={{ backgroundColor: color[0] }}>
                 {
                     on ? <span>{result}</span> : <span style={{ color: "gray" }}>OFF</span>
                 }
@@ -88,7 +120,7 @@ export default function Display() {
                 <button onClick={handleSettings}><i style={{ color: "gray", fontSize: "20px" }} class="fas fa-cog"></i></button>
                 <button onClick={handleHistory}><i style={{ color: "gray", fontSize: "20px" }} class="fas fa-history"></i></button>
             </div>
-            {settings ? <Settings color="black" /> : history ? <History /> :
+            {settings ? <Settings color="black" /> : history ? <History his={storeHis} /> :
 
                 <div className="displayKeys">
 
@@ -124,6 +156,8 @@ export default function Display() {
 
                 </div>
             }
+
+
         </div>
     );
 

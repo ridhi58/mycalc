@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function History(props) {
 
     const [showHis, setShowHis] = useState(false)
     const [history, setHistory] = useState([])
 
-
+    const isLoggedIn = useSelector(state => state.isLogged)
     useEffect(() => {
 
 
-        if (localStorage.getItem("user") == null)
+        if (!isLoggedIn)
             setShowHis(false)
         else {
             setShowHis(true)

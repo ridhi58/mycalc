@@ -3,23 +3,33 @@ import './header.css'
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { logoutRedux } from '../redux/LoginRedux/LoginAction'
+import { useSelector, useDispatch } from 'react-redux'
 export default function Header() {
+    const reduxUser = useSelector(state => state.isLogged)
     const history = useHistory();
     const url = "http://localhost:5000/logout"
     const [log, setLog] = useState(true)
-
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(localStorage.getItem("user"))
-        if (localStorage.getItem("user") != null)
+        console.log("redux user", reduxUser)
+        if (reduxUser)
             setLog(false)
+        else {
+            setLog(true)
+        }
+        // if (localStorage.getItem("user") != null)
+        //     setLog(false)
 
     })
 
     const logout = () => {
         console.log("logout called")
+
         axios.post(url, { token: "" }, { withCredentials: true }).then(() => {
-            localStorage.removeItem("user")
+            dispatch(logoutRedux())
+            // localStorage.removeItem("user")
             alert("logout success")
             setLog(true)
 

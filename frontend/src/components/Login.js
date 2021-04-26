@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { loginRedux } from '../redux/LoginRedux/LoginAction'
 import './login.css'
 // import Cookies from 'js-cookie';
-export default function Login() {
+export default function Login(props) {
 
     const url = "http://localhost:5000/"
     const [register, setReg] = useState(false);
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
+
+    const isLoggedIn = useSelector(state => state.isLogged)
+    const dispatch = useDispatch()
 
     const history = useHistory();
 
@@ -22,6 +27,8 @@ export default function Login() {
 
     const Login = () => {
 
+
+
         let obj = {
 
             email: email,
@@ -29,11 +36,12 @@ export default function Login() {
         }
         axios.post(url + 'login', obj, { withCredentials: true }).then((res) => {
             alert("success")
+            dispatch(loginRedux())
 
             // Cookies.set("myCookie", res.data.token)
             localStorage.setItem("user", email)
-            history.push('/')
-            window.location.reload()
+            props.history.push('/')
+
 
         }).catch((e) => {
             console.log(e)

@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { loginRedux } from '../redux/LoginRedux/LoginAction'
 import './login.css'
-// import Cookies from 'js-cookie';
 export default function Login(props) {
 
     const url = "http://localhost:5000/"
@@ -12,7 +11,6 @@ export default function Login(props) {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
-
     const isLoggedIn = useSelector(state => state.isLogged)
     const dispatch = useDispatch()
 
@@ -24,11 +22,7 @@ export default function Login(props) {
     const handleC = () => {
         setReg(false)
     }
-
     const Login = () => {
-
-
-
         let obj = {
 
             email: email,
@@ -36,19 +30,12 @@ export default function Login(props) {
         }
         axios.post(url + 'login', obj, { withCredentials: true }).then((res) => {
             alert("success")
-            dispatch(loginRedux())
-
-            // Cookies.set("myCookie", res.data.token)
-            localStorage.setItem("user", email)
+            dispatch(loginRedux(obj.email.substring(0, email.lastIndexOf("@"))))
             props.history.push('/')
-
-
         }).catch((e) => {
             console.log(e)
             alert("The emailid id not registerd")
         })
-
-
     }
 
     const Register = () => {
@@ -76,8 +63,8 @@ export default function Login(props) {
             <div className="login1">
                 {!register ? <div>
                     <p style={{ textAlign: "center", fontSize: "25px" }}>Login</p>
-                    <input placeholder="Email" type="text" value={email} onChange={(e) => { setEmail(e.target.value) }}></input><br />
-                    <input placeholder="Password" type="text" value={pass} onChange={(e) => { setPass(e.target.value) }}></input><br />
+                    <input placeholder="Email" type="text" value={email} onChange={(e) => { setEmail(e.target.value) }} required></input><br />
+                    <input placeholder="Password" type="password" value={pass} onChange={(e) => { setPass(e.target.value) }} required></input><br />
                     <button onClick={Login} className="loginB" >Login</button>
                     <p style={{ color: "rgba(0,0,0,0.8)" }}>Not a registered user? <button style={{ textDecoration: "underline" }} onClick={handleChange} >Register here</button></p>
                 </div>

@@ -1,6 +1,7 @@
-export const loginRedux = () => {
+export const loginRedux = (user) => {
     return {
-        type: 'LOGIN_REDUX'
+        type: 'LOGIN_REDUX',
+        payload: user
     }
 }
 
